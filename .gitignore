@@ -12,3 +12,5 @@ config.xml
 hooks/
 ionic.project
 scss/
+www/lib/
+www/www.iml
