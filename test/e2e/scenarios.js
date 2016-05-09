@@ -10,10 +10,14 @@ describe('planner App E2E Testing', function() {
     page = new HomePage();
   });
 
-  it('should automatically redirect to /', function() {
-    browser.sleep(1000);
-    page.menuOpener.click();
+  it('should open on home page', function() {
     expect(browser.getLocationAbsUrl()).toMatch("/app/home");
+    expect(page.header.getText()).toEqual('Current Sprint');
+  });
+
+  it('should open navigation menu', function() {
+    page.menuOpener.click();
+    expect(page.leftMenuHeader.getText()).toEqual("Navigation");
   });
 
 
