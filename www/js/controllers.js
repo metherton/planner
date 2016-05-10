@@ -53,4 +53,19 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+})
+
+  //.controller('UserCtrl', function($scope) {
+  //  $scope.users = [
+  //    { name: 'Martin', id: 1 },
+  //    { name: 'Erna', id: 2 }
+  //  ];
+  //})
+
+  .controller('UserCtrl', ['$scope', 'users', function ($scope, users) {
+
+    $scope.users = users;
+
+  }])
+
+;
