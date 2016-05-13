@@ -7,7 +7,7 @@ exports.config = {
         'browserName': 'chrome'
     },
 
-    baseUrl: 'http://192.168.0.101:8100/',
+    baseUrl: 'http://192.168.99.1:8100',
 
     framework: 'jasmine',
     directConnect: true,

@@ -1,7 +1,7 @@
 'use strict';
 
 var HomePage = function () {
-  browser.get('index.html');
+  browser.get('/');
 };
 
 HomePage.prototype = Object.create({}, {
@@ -12,6 +12,8 @@ HomePage.prototype = Object.create({}, {
   todoList: { get: function () { return element.all(by.repeater('todo in todos')); }},
   typeName: { value: function (keys) { return this.yourName.sendKeys(keys); }},
   todoAt: { value: function (idx) { return this.todoList.get(idx).getText(); }},
+  createSprintLink: {get: function () { return element(by.xpath('/html/body/ion-nav-view/ion-side-menus/ion-side-menu/ion-content/div[1]/ion-list/div/ion-item[10]')); }},
+  createSprintHeader: {get: function () { return element(by.xpath('/html/body/div[3]/div[2]/ion-modal-view/ion-header-bar/h1')); }},
   addTodo: { value: function (todo) {
     this.todoText.sendKeys(todo);
     this.addButton.click();

@@ -47,6 +47,34 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+  $ionicModal.fromTemplateUrl('templates/createSprint.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.createSprintForm = modal;
+  });
+
+  // Triggered in the reserve modal to close it
+  $scope.closeCreateSprint = function() {
+    $scope.createSprintForm.hide();
+  };
+
+  // Open the reserve modal
+  $scope.createSprint = function() {
+    $scope.createSprintForm.show();
+  };
+
+  // Perform the reserve action when the user submits the reserve form
+  $scope.doCreateSprint = function() {
+    console.log('Doing create sprint', $scope.sprint);
+
+    // Simulate a reservation delay. Remove this and replace with your reservation
+    // code if using a server system
+    $timeout(function() {
+      $scope.closeCreateSprint();
+    }, 1000);
+  };
+
 })
 
 .controller('PlaylistsCtrl', function($scope) {

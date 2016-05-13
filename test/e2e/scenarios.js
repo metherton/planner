@@ -10,15 +10,21 @@ describe('planner App E2E Testing', function() {
     page = new HomePage();
   });
 
-  it('should open on home page', function() {
-    expect(browser.getLocationAbsUrl()).toMatch("/app/home");
+  xit('should open on home page', function() {
+    expect(browser.getLocationAbsUrl()).toMatch('/app/home');
     expect(page.header.getText()).toEqual('Current Sprint');
   });
 
-  it('should open navigation menu', function() {
+  xit('should open navigation menu', function() {
     page.menuOpener.click();
-    expect(page.leftMenuHeader.getText()).toEqual("Navigation");
+    expect(page.leftMenuHeader.getText()).toEqual('Navigation');
   });
 
+  it('should open create sprint form', function() {
+    page.menuOpener.click();
+    expect(page.leftMenuHeader.getText()).toEqual('Navigation');
+    page.createSprintLink.click();
+    expect(page.createSprintHeader.getText()).toEqual('Create Sprint');
+  });
 
 });
