@@ -59,6 +59,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
             users:  ['userFactory', function(userFactory){
               return userFactory.query();
             }]
+            //users:  ['userFactory', '$q', function(userFactory, $q){
+            //  var defer = $q.defer();
+            //  userFactory.query().$promise.then(
+            //    function(response) {
+            //      defer.resolve(response);
+            //    }
+            //    ,
+            //    function(error) {
+            //      defer.reject(error);
+            //    }
+            //  );
+            //  return defer.promise;
+            //}]
           }
         }
       }
