@@ -2,39 +2,26 @@
   <ion-header-bar>
     <h1 class="title">Create Sprint</h1>
     <div class="buttons">
-      <button class="button button-clear" ng-click="closeReserve()">Close</button>
+      <button class="button button-clear" ng-click="closeCreateSprint()">Close</button>
     </div>
   </ion-header-bar>
   <ion-content>
-    <form id="reserveForm" name="reserveForm" ng-submit="doReserve()">
+    <form id="createSprintForm" name="createSprintForm" ng-submit="doCreateSprint()">
       <div class="list">
-        <label class="item item-input item-select">
-          <span class="input-label">Number of Guests</span>
-          <select ng-model="reservation.numGuests">
-            <option ng-repeat="n in [1,2,3,4,5,6]" value="{{n}}">{{n}}</option>
-          </select>
-        </label>
-        <li class="item item-toggle">
-          Smoking?
-          <label class="toggle toggle-assertive">
-            <input type="checkbox" ng-model="reservation.smoking">
-            <div class="track">
-              <div class="handle">
-              </div>
-            </div>
-          </label>
-        </li>
         <label class="item item-input">
-          <span class="input-label">Date</span>
-          <input type="date" ng-model="reservation.date">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="sprint.name">
         </label>
         <label class="item item-input">
-          <span class="input-label">Time</span>
-          <input type="time" ng-model="reservation.time"
-                 name="reservetime" min="11:00:00" max="21:00:00">
+          <span class="input-label">Begin Date</span>
+          <input type="date" ng-model="sprint.beginDate">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">End Date</span>
+          <input type="date" ng-model="sprint.endDate">
         </label>
         <label class="item">
-          <button class="button button-block button-positive" type="submit">Reserve</button>
+          <button class="button button-block button-positive" type="submit">Create</button>
         </label>
       </div>
     </form>

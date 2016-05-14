@@ -23,6 +23,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+
+
   $stateProvider
 
     .state('app', {
@@ -55,6 +57,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'menuContent': {
           templateUrl: 'templates/users.html',
           controller: 'UserCtrl',
+          cache: false,
           resolve: {
             users:  ['userFactory', function(userFactory){
               return userFactory.query();
