@@ -3,7 +3,10 @@
 angular.module('starter.services', ['ngResource'])
   //.constant("baseURL","http://localhost:3000/")
   .constant("baseURL","http://localhost:3000/api/")
-  .factory('userFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+  .factory('userFactory', ['$resource', 'baseURL', '$http', function ($resource, baseURL, $http) {
+
+
+    console.log($http.defaults.headers.common);
 
     return $resource(baseURL + "users/:id", null, {
       'update': {

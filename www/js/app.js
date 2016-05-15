@@ -6,7 +6,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $http) {
+  //.run(function($ionicPlatform, $http) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,9 +21,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
   });
+
+  //console.log('http', $http.defaults.headers);
+  //
+  //$http.defaults.headers.get = [];
+  //
+  //
+  //$http.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+  //// extra
+  //$http.defaults.headers.get['Cache-Control'] = 'no-cache';
+  //$http.defaults.headers.get['Pragma'] = 'no-cache';
+
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
 
 
   $stateProvider
@@ -59,7 +72,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'UserCtrl',
           cache: false,
           resolve: {
-            users:  ['userFactory', function(userFactory){
+            users:  ['userFactory', '$http', function(userFactory, $http){
+              console.log($http.defaults.headers.common)
               return userFactory.query();
             }]
             //users:  ['userFactory', '$q', function(userFactory, $q){

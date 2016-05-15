@@ -47,7 +47,8 @@ angular.module('starter.controllers', [])
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
 
-    $state.go($state.current, {}, {reload: true});
+    //$state.go($state.current, {}, {reload: true});
+    $state.reload();
 
     $timeout(function() {
       $scope.closeLogin();
