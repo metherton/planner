@@ -73,7 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           cache: false,
           resolve: {
             users:  ['userFactory', '$http', function(userFactory, $http){
-              console.log($http.defaults.headers.common)
+              console.log($http.defaults.headers.common);
               return userFactory.query();
             }]
             //users:  ['userFactory', '$q', function(userFactory, $q){

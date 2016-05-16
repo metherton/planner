@@ -15,6 +15,14 @@ angular.module('starter.services', ['ngResource'])
     });
 
   }])
+  .factory('sprintFactory', ['$resource', 'baseURL', function($resource,baseURL) {
+
+    return $resource(baseURL +"sprints/:id", null, {
+      'update': {
+        method: 'PUT'
+      }
+    });
+  }])
   .factory('$localStorage', ['$window', function($window) {
     return {
       store: function(key, value) {

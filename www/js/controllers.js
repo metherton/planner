@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, AuthFactory, $localStorage, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, AuthFactory, $localStorage, $state, sprintFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -14,6 +14,8 @@ angular.module('starter.controllers', [])
   $scope.reservation = {};
   $scope.registration = {};
   $scope.loggedIn = false;
+
+  $scope.sprint = {};
 
   if(AuthFactory.isAuthenticated()) {
     $scope.loggedIn = true;
@@ -80,6 +82,9 @@ angular.module('starter.controllers', [])
   // Perform the reserve action when the user submits the reserve form
   $scope.doCreateSprint = function() {
     console.log('Doing create sprint', $scope.sprint);
+
+    sprintFactory.save($scope.sprint);
+
 
     // Simulate a reservation delay. Remove this and replace with your reservation
     // code if using a server system
