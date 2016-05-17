@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, AuthFactory, $localStorage, $state, sprintFactory) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, AuthFactory, $localStorage, $state, sprintFactory, users, storyFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -15,7 +15,10 @@ angular.module('starter.controllers', [])
   $scope.registration = {};
   $scope.loggedIn = false;
 
+
   $scope.sprint = {};
+  $scope.story = {};
+  $scope.users = users;
 
   if(AuthFactory.isAuthenticated()) {
     $scope.loggedIn = true;
@@ -90,6 +93,35 @@ angular.module('starter.controllers', [])
     // code if using a server system
     $timeout(function() {
       $scope.closeCreateSprint();
+    }, 1000);
+  };
+
+  $ionicModal.fromTemplateUrl('templates/createStory.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.createStoryForm = modal;
+  });
+
+  // Triggered in the reserve modal to close it
+  $scope.closeCreateStory = function() {
+    $scope.createStoryForm.hide();
+  };
+
+  // Open the reserve modal
+  $scope.createStory = function() {
+    $scope.createStoryForm.show();
+  };
+
+  $scope.doCreateStory = function() {
+    console.log('Doing create story', $scope.story);
+
+    storyFactory.save($scope.story);
+
+
+    // Simulate a reservation delay. Remove this and replace with your reservation
+    // code if using a server system
+    $timeout(function() {
+      $scope.closeCreateStory();
     }, 1000);
   };
 

@@ -44,7 +44,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/app',
     abstract: true,
     templateUrl: 'templates/sidebar.html',
-    controller: 'AppCtrl'
+    controller: 'AppCtrl',
+      resolve: {
+        users: ['userFactory', '$http', function (userFactory, $http) {
+          return userFactory.query();
+        }]
+      }
   })
 
   .state('app.search', {

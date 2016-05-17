@@ -23,6 +23,14 @@ angular.module('starter.services', ['ngResource'])
       }
     });
   }])
+  .factory('storyFactory', ['$resource', 'baseURL', function($resource,baseURL) {
+
+    return $resource(baseURL +"stories/:id", null, {
+      'update': {
+        method: 'PUT'
+      }
+    });
+  }])
   .factory('$localStorage', ['$window', function($window) {
     return {
       store: function(key, value) {
