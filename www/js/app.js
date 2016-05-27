@@ -45,12 +45,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     abstract: true,
     templateUrl: 'templates/sidebar.html',
     controller: 'AppCtrl',
+      cache: false,
       resolve: {
         users: ['userFactory', '$http', function (userFactory, $http) {
           return userFactory.query();
         }]
       }
   })
+
+  //.state('app', {
+  //  url: '/app',
+  //  abstract: true,
+  //  templateUrl: 'templates/sidebar.html',
+  //  controller: 'AppCtrl',
+  //  resolve: {
+  //    users: ['userFactory', '$http', function (userFactory, $http) {
+  //      return userFactory.query();
+  //    }]
+  //  }
+  //})
+
+  //.state('app', {
+  //  url: '/app',
+  //  abstract: true,
+  //  templateUrl: 'templates/sidebar.html',
+  //  controller: 'LoginCtrl'
+  //})
 
   .state('app.search', {
     url: '/search',
@@ -119,4 +139,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
+  //$urlRouterProvider.otherwise('/app/login');
 });

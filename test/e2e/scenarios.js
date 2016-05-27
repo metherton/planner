@@ -20,11 +20,16 @@ describe('planner App E2E Testing', function() {
     expect(page.leftMenuHeader.getText()).toEqual('Navigation');
   });
 
-  it('should open create sprint form', function() {
+  xit('should open create sprint form', function() {
     page.menuOpener.click();
     expect(page.leftMenuHeader.getText()).toEqual('Navigation');
     page.createSprintLink.click();
     expect(page.createSprintHeader.getText()).toEqual('Create Sprint');
+  });
+
+  it('should show login page by default', function() {
+    expect(browser.getLocationAbsUrl()).toMatch('/app/login');
+    expect(page.header.getText()).toEqual('Login');
   });
 
 });
