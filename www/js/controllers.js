@@ -12,6 +12,8 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+      console.log('in app control');
+
   // Form data for the login modal
   $scope.loginData = {};
   //$scope.reservation = {};
@@ -24,11 +26,7 @@ angular.module('starter.controllers', [])
   $scope.users = users;
   //console.log($scope.users);
 
-
-      console.log('in controller ++++++++++++++++++');
-
   if(AuthFactory.isAuthenticated()) {
-    console.log('in real authenticated ++++++++++++++++++');
     $scope.loggedIn = true;
     $scope.username = AuthFactory.getUsername();
   }
@@ -136,6 +134,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistsCtrl', function($scope) {
+  console.log('in PlaylistsCtrl');
+
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
@@ -147,6 +147,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+  console.log('in PlaylistCtrl');
 })
 
   //.controller('UserCtrl', function($scope) {
@@ -158,6 +159,7 @@ angular.module('starter.controllers', [])
 
 .controller('UserCtrl', ['$scope', 'users', function ($scope, users) {
 
+  console.log('in UserCtrl');
   $scope.users = users;
   console.log(users);
 
