@@ -3,7 +3,7 @@ angular.module('starter.controllers', [])
 //.controller('AppCtrl', function($scope, $ionicModal, $timeout, AuthFactory, $localStorage, $state, sprintFactory, users, storyFactory) {
 //  .controller('AppCtrl', function($scope, $ionicModal, $timeout, $localStorage, $state, sprintFactory, users, storyFactory) {
 
-    .controller('AppCtrl', function($scope, $ionicModal, $timeout, users, AuthFactory) {
+    .controller('AppCtrl', function($scope, $ionicModal, $timeout, users, AuthFactory, $localStorage, $state, sprintFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -12,19 +12,17 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-      console.log('in app control');
 
   // Form data for the login modal
   $scope.loginData = {};
   //$scope.reservation = {};
   //$scope.registration = {};
   $scope.loggedIn = false;
+  $scope.sprint = {};
 
 
-  //$scope.sprint = {};
   //$scope.story = {};
   $scope.users = users;
-  //console.log($scope.users);
 
   if(AuthFactory.isAuthenticated()) {
     $scope.loggedIn = true;
@@ -49,22 +47,21 @@ angular.module('starter.controllers', [])
   };
 
   // Perform the login action when the user submits the login form
-  //$scope.doLogin = function() {
-  //  console.log('Doing login', $scope.loginData);
-  //
-  //  $localStorage.storeObject('userinfo',$scope.loginData);
-  //
-  //  AuthFactory.login($scope.loginData);
-  //  // Simulate a login delay. Remove this and replace with your login
-  //  // code if using a login system
-  //
-  //  //$state.go($state.current, {}, {reload: true});
-  //  $state.reload();
-  //
-  //  $timeout(function() {
-  //    $scope.closeLogin();
-  //  }, 1000);
-  //};
+  $scope.doLogin = function() {
+
+    $localStorage.storeObject('userinfo',$scope.loginData);
+
+    AuthFactory.login($scope.loginData);
+    // Simulate a login delay. Remove this and replace with your login
+    // code if using a login system
+
+    //$state.go($state.current, {}, {reload: true});
+    $state.reload();
+
+    $timeout(function() {
+      $scope.closeLogin();
+    }, 1000);
+  };
 
   $scope.logOut = function() {
     AuthFactory.logout();
@@ -72,64 +69,68 @@ angular.module('starter.controllers', [])
     $scope.username = '';
   };
 
-  //$ionicModal.fromTemplateUrl('templates/createSprint.html', {
-  //  scope: $scope
-  //}).then(function(modal) {
-  //  $scope.createSprintForm = modal;
-  //});
+  $ionicModal.fromTemplateUrl('templates/createSprint.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.createSprintForm = modal;
+  });
 
   // Triggered in the reserve modal to close it
-  //$scope.closeCreateSprint = function() {
-  //  $scope.createSprintForm.hide();
-  //};
+  $scope.closeCreateSprint = function() {
+    $scope.createSprintForm.hide();
+  };
 
   // Open the reserve modal
-  //$scope.createSprint = function() {
-  //  $scope.createSprintForm.show();
-  //};
+  $scope.createSprint = function() {
+    $scope.createSprintForm.show();
+  };
 
   // Perform the reserve action when the user submits the reserve form
-  //$scope.doCreateSprint = function() {
-  //  console.log('Doing create sprint', $scope.sprint);
+  $scope.doCreateSprint = function() {
+    console.log('Doing create sprint', $scope.sprint);
+
+    console.log(sprintFactory);
+
+    sprintFactory.save($scope.sprint).$promise.then(function(response) {
+      console.log(response.data);
+    });
+
+
+    // Simulate a reservation delay. Remove this and replace with your reservation
+    // code if using a server system
+    $timeout(function() {
+      $scope.closeCreateSprint();
+    }, 1000);
+  };
   //
-  //  sprintFactory.save($scope.sprint);
-  //
-  //
-  //  // Simulate a reservation delay. Remove this and replace with your reservation
-  //  // code if using a server system
-  //  $timeout(function() {
-  //    $scope.closeCreateSprint();
-  //  }, 1000);
-  //};
-  //
-  //$ionicModal.fromTemplateUrl('templates/createStory.html', {
-  //  scope: $scope
-  //}).then(function(modal) {
-  //  $scope.createStoryForm = modal;
-  //});
+  $ionicModal.fromTemplateUrl('templates/createStory.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.createStoryForm = modal;
+  });
   //
   //// Triggered in the reserve modal to close it
-  //$scope.closeCreateStory = function() {
-  //  $scope.createStoryForm.hide();
-  //};
+  $scope.closeCreateStory = function() {
+    $scope.createStoryForm.hide();
+  };
   //
   //// Open the reserve modal
-  //$scope.createStory = function() {
-  //  $scope.createStoryForm.show();
-  //};
+  $scope.createStory = function() {
+    $scope.createStoryForm.show();
+  };
   //
-  //$scope.doCreateStory = function() {
-  //  console.log('Doing create story', $scope.story);
-  //
-  //  storyFactory.save($scope.story);
-  //
-  //
-  //  // Simulate a reservation delay. Remove this and replace with your reservation
-  //  // code if using a server system
-  //  $timeout(function() {
-  //    $scope.closeCreateStory();
-  //  }, 1000);
-  //};
+  $scope.doCreateStory = function() {
+    console.log('Doing create story', $scope.story);
+
+    storyFactory.save($scope.story);
+
+
+    // Simulate a reservation delay. Remove this and replace with your reservation
+    // code if using a server system
+    $timeout(function() {
+      $scope.closeCreateStory();
+    }, 1000);
+  };
 
 })
 
