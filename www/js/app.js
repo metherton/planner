@@ -128,12 +128,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         views: {
           'menuContent': {
             templateUrl: 'templates/sprints.html',
-            controller: 'UserCtrl',
-            cache: false,
+            controller: 'SprintCtrl',
             resolve: {
-              users:  ['userFactory', '$http', function(userFactory, $http){
+              sprints:  ['sprintFactory', '$http', function(sprintFactory, $http){
                 console.log($http.defaults.headers.common);
-                return userFactory.query();
+                return sprintFactory.query();
               }]
               //users:  ['userFactory', '$q', function(userFactory, $q){
               //  var defer = $q.defer();

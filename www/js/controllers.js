@@ -164,6 +164,13 @@ angular.module('starter.controllers', [])
   console.log(users);
 
 }])
+.controller('SprintCtrl', ['$scope', 'sprints', function ($scope, sprints) {
+
+  console.log('in SprintCtrl');
+  $scope.sprints = sprints;
+  console.log(sprints);
+
+}])
 
 .controller('LoginCtrl', function () {
 
