@@ -22,16 +22,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   });
 
-  //console.log('http', $http.defaults.headers);
-  //
-  //$http.defaults.headers.get = [];
-  //
-  //
-  //$http.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
-  //// extra
-  //$http.defaults.headers.get['Cache-Control'] = 'no-cache';
-  //$http.defaults.headers.get['Pragma'] = 'no-cache';
-
 })
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -39,19 +29,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 
   $stateProvider
-
-  //  .state('app', {
-  //  url: '/app',
-  //  abstract: true,
-  //  templateUrl: 'templates/sidebar.html',
-  //  controller: 'AppCtrl',
-  //    cache: false,
-  //    resolve: {
-  //      users: ['userFactory', '$http', function (userFactory, $http) {
-  //        return userFactory.query();
-  //      }]
-  //    }
-  //})
 
   .state('app', {
     url: '/app',
@@ -67,15 +44,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }]
     }
   })
-
-
-
-  //.state('app', {
-  //  url: '/app',
-  //  abstract: true,
-  //  templateUrl: 'templates/sidebar.html',
-  //  controller: 'LoginCtrl'
-  //})
 
   .state('app.search', {
     url: '/search',
@@ -106,19 +74,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
               console.log($http.defaults.headers.common);
               return userFactory.query();
             }]
-            //users:  ['userFactory', '$q', function(userFactory, $q){
-            //  var defer = $q.defer();
-            //  userFactory.query().$promise.then(
-            //    function(response) {
-            //      defer.resolve(response);
-            //    }
-            //    ,
-            //    function(error) {
-            //      defer.reject(error);
-            //    }
-            //  );
-            //  return defer.promise;
-            //}]
+
           }
         }
       }
@@ -134,19 +90,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 console.log($http.defaults.headers.common);
                 return sprintFactory.query();
               }]
-              //users:  ['userFactory', '$q', function(userFactory, $q){
-              //  var defer = $q.defer();
-              //  userFactory.query().$promise.then(
-              //    function(response) {
-              //      defer.resolve(response);
-              //    }
-              //    ,
-              //    function(error) {
-              //      defer.reject(error);
-              //    }
-              //  );
-              //  return defer.promise;
-              //}]
+
             }
           }
         }
@@ -175,5 +119,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/app/home');
   $urlRouterProvider.otherwise('/app/home');
-  //$urlRouterProvider.otherwise('/app/login');
 });
