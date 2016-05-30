@@ -27,9 +27,18 @@ describe('planner App E2E Testing', function() {
     expect(page.createSprintHeader.getText()).toEqual('Create Sprint');
   });
 
-  it('should show login page by default', function() {
-    expect(browser.getLocationAbsUrl()).toMatch('/app/login');
-    expect(page.header.getText()).toEqual('Login');
+  xit('should open users list', function() {
+    page.menuOpener.click();
+    expect(page.leftMenuHeader.getText()).toEqual('Navigation');
+    page.usersLink.click();
+    expect(page.linksHeader.getText()).toEqual('Users');
+  });
+
+  it('should open sprints list', function() {
+    page.menuOpener.click();
+    expect(page.leftMenuHeader.getText()).toEqual('Navigation');
+    page.sprintsLink.click();
+    expect(page.linksHeader.getText()).toEqual('Sprints');
   });
 
 });

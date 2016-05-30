@@ -3,7 +3,7 @@ angular.module('starter.controllers', [])
 //.controller('AppCtrl', function($scope, $ionicModal, $timeout, AuthFactory, $localStorage, $state, sprintFactory, users, storyFactory) {
 //  .controller('AppCtrl', function($scope, $ionicModal, $timeout, $localStorage, $state, sprintFactory, users, storyFactory) {
 
-    .controller('AppCtrl', function($scope, $ionicModal, $timeout, users, AuthFactory, $localStorage, $state, sprintFactory) {
+    .controller('AppCtrl', function($scope, $ionicModal, $timeout, users, AuthFactory, $localStorage, $state, sprintFactory, sprints) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -23,6 +23,7 @@ angular.module('starter.controllers', [])
 
   //$scope.story = {};
   $scope.users = users;
+  $scope.sprints = sprints;
 
   if(AuthFactory.isAuthenticated()) {
     $scope.loggedIn = true;
@@ -88,8 +89,6 @@ angular.module('starter.controllers', [])
   // Perform the reserve action when the user submits the reserve form
   $scope.doCreateSprint = function() {
     console.log('Doing create sprint', $scope.sprint);
-
-    console.log(sprintFactory);
 
     sprintFactory.save($scope.sprint).$promise.then(function(response) {
       console.log(response.data);

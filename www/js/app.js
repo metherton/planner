@@ -61,6 +61,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     resolve: {
       users: ['userFactory', '$http', function (userFactory, $http) {
         return userFactory.query();
+      }],
+      sprints: ['sprintFactory', '$http', function (sprintFactory, $http) {
+        return sprintFactory.query();
       }]
     }
   })
@@ -120,6 +123,35 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+      .state('app.sprints', {
+        url: '/sprints',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/sprints.html',
+            controller: 'UserCtrl',
+            cache: false,
+            resolve: {
+              users:  ['userFactory', '$http', function(userFactory, $http){
+                console.log($http.defaults.headers.common);
+                return userFactory.query();
+              }]
+              //users:  ['userFactory', '$q', function(userFactory, $q){
+              //  var defer = $q.defer();
+              //  userFactory.query().$promise.then(
+              //    function(response) {
+              //      defer.resolve(response);
+              //    }
+              //    ,
+              //    function(error) {
+              //      defer.reject(error);
+              //    }
+              //  );
+              //  return defer.promise;
+              //}]
+            }
+          }
+        }
+      })
     .state('app.playlists', {
       url: '/home',
       views: {

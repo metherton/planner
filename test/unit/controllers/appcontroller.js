@@ -1,18 +1,21 @@
 'use strict';
 
+
 describe('Controller: AppCtrl', function() {
 
     beforeEach(module('starter.controllers'));
 
 
     var AppCtrl, scope, mockIonicModal, $q, deferredModal, mockUsers, mockAuthFactory,
-      mockLocalStorage, mockState, mockSprintFactory, deferredSave;
+      mockLocalStorage, mockState, mockSprintFactory, deferredSave, mockSprints;
 
 
     describe('not authenticated', function() {
       beforeEach(function() {
 
         mockUsers = ['martin', 'fred'],
+            mockSprints = ['sprint1', 'sprint2'],
+
           mockIonicModal = {
             fromTemplateUrl: function() {
               deferredModal = $q.defer();
@@ -66,13 +69,16 @@ describe('Controller: AppCtrl', function() {
           $scope: scope,
           $ionicModal: mockIonicModal,
           users: mockUsers,
-          AuthFactory: mockAuthFactory
+          AuthFactory: mockAuthFactory,
+          sprints: mockSprints
         });
       }));
 
       it('should initialize scope variables', function() {
         expect(scope.loginData).toBeDefined();
         expect(scope.users).toBeDefined();
+        expect(scope.sprints).toBeDefined();
+
         expect(scope.loggedIn).toBeFalsy();
       });
 
@@ -103,6 +109,7 @@ describe('Controller: AppCtrl', function() {
         storeObject: jasmine.createSpy('storeObject')
       },
       mockUsers = ['martin', 'fred'],
+          mockSprints = ['sprint1', 'sprint2'],
       mockIonicModal = {
         fromTemplateUrl: function() {
           deferredModal = $q.defer();
@@ -159,7 +166,8 @@ describe('Controller: AppCtrl', function() {
         $scope: scope,
         $ionicModal: mockIonicModal,
         users: mockUsers,
-        AuthFactory: mockAuthFactory
+        AuthFactory: mockAuthFactory,
+        sprints: mockSprints
       });
 
 
