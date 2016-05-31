@@ -3,9 +3,9 @@
 angular.module('starter.services')
   .factory('AuthFactory', AuthFactory);
 
-AuthFactory.$inject = ['$resource', '$http', 'localStorage', '$rootScope', 'baseURL', '$ionicPopup'];
+AuthFactory.$inject = ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup'];
 
-function AuthFactory($resource, $http, localStorage, $rootScope, baseURL, $ionicPopup) {
+function AuthFactory($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup) {
 
   var authFac = {};
   var TOKEN_KEY = 'Token';
@@ -15,14 +15,14 @@ function AuthFactory($resource, $http, localStorage, $rootScope, baseURL, $ionic
 
 
   function loadUserCredentials() {
-    var credentials = localStorage.getObject(TOKEN_KEY,'{}');
+    var credentials = $localStorage.getObject(TOKEN_KEY,'{}');
     if (credentials.username != undefined) {
       useCredentials(credentials);
     }
   }
 
   function storeUserCredentials(credentials) {
-    localStorage.storeObject(TOKEN_KEY, credentials);
+    $localStorage.storeObject(TOKEN_KEY, credentials);
     useCredentials(credentials);
   }
 
@@ -40,7 +40,7 @@ function AuthFactory($resource, $http, localStorage, $rootScope, baseURL, $ionic
     username = '';
     isAuthenticated = false;
     $http.defaults.headers.common['x-access-token'] = authToken;
-    localStorage.remove(TOKEN_KEY);
+    $localStorage.remove(TOKEN_KEY);
   }
 
   authFac.login = function(loginData) {
