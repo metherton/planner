@@ -3,34 +3,8 @@
 angular.module('starter.services', ['ngResource'])
   //.constant("baseURL","http://localhost:3000/")
   .constant("baseURL","http://localhost:3000/api/")
-  .factory('userFactory', ['$resource', 'baseURL', '$http', function ($resource, baseURL, $http) {
 
 
-    console.log($http.defaults.headers.common);
-
-    return $resource(baseURL + "users/:id", null, {
-      'update': {
-        method: 'PUT'
-      }
-    });
-
-  }])
-  .factory('sprintFactory', ['$resource', 'baseURL', function($resource,baseURL) {
-
-    return $resource(baseURL +"sprints/:id", null, {
-      'update': {
-        method: 'PUT'
-      }
-    });
-  }])
-  .factory('storyFactory', ['$resource', 'baseURL', function($resource,baseURL) {
-
-    return $resource(baseURL +"stories/:id", null, {
-      'update': {
-        method: 'PUT'
-      }
-    });
-  }])
   .factory('$localStorage', ['$window', function($window) {
     return {
       store: function(key, value) {
@@ -50,120 +24,193 @@ angular.module('starter.services', ['ngResource'])
       }
     }
   }])
-  .factory('AuthFactory', ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup', function($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup){
 
-    var authFac = {};
-    var TOKEN_KEY = 'Token';
-    var isAuthenticated = false;
-    var username = '';
-    var authToken = undefined;
+    .factory('sprintFactory', sprintFactory)
 
+    .factory('storyFactory', storyFactory)
+    .factory('userFactory', userFactory)
 
-    function loadUserCredentials() {
-      var credentials = $localStorage.getObject(TOKEN_KEY,'{}');
-      if (credentials.username != undefined) {
-        useCredentials(credentials);
-      }
+    .factory('AuthFactory', AuthFactory)
+
+    .factory('$localStorage', $localStorage);
+
+$localStorage.$inject = ['$window'];
+
+function $localStorage($window) {
+  return {
+    store: function(key, value) {
+      $window.localStorage[key] = value;
+    },
+    get: function(key, defaultValue) {
+      return $window.localStorage[key] || defaultValue;
+    },
+    remove: function (key) {
+      $window.localStorage.removeItem(key);
+    },
+    storeObject: function(key, value) {
+      $window.localStorage[key] = JSON.stringify(value);
+    },
+    getObject: function(key,defaultValue) {
+      return JSON.parse($window.localStorage[key] || defaultValue);
     }
+  }
+}
 
-    function storeUserCredentials(credentials) {
-      $localStorage.storeObject(TOKEN_KEY, credentials);
+
+
+
+AuthFactory.$inject = ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup'];
+
+function AuthFactory($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup) {
+
+  var authFac = {};
+  var TOKEN_KEY = 'Token';
+  var isAuthenticated = false;
+  var username = '';
+  var authToken = undefined;
+
+
+  function loadUserCredentials() {
+    var credentials = $localStorage.getObject(TOKEN_KEY,'{}');
+    if (credentials.username != undefined) {
       useCredentials(credentials);
     }
+  }
 
-    function useCredentials(credentials) {
-      isAuthenticated = true;
-      username = credentials.username;
-      authToken = credentials.token;
+  function storeUserCredentials(credentials) {
+    $localStorage.storeObject(TOKEN_KEY, credentials);
+    useCredentials(credentials);
+  }
 
-      // Set the token as header for your requests!
-      $http.defaults.headers.common['x-access-token'] = authToken;
-    }
+  function useCredentials(credentials) {
+    isAuthenticated = true;
+    username = credentials.username;
+    authToken = credentials.token;
 
-    function destroyUserCredentials() {
-      authToken = undefined;
-      username = '';
-      isAuthenticated = false;
-      $http.defaults.headers.common['x-access-token'] = authToken;
-      $localStorage.remove(TOKEN_KEY);
-    }
+    // Set the token as header for your requests!
+    $http.defaults.headers.common['x-access-token'] = authToken;
+  }
 
-    authFac.login = function(loginData) {
+  function destroyUserCredentials() {
+    authToken = undefined;
+    username = '';
+    isAuthenticated = false;
+    $http.defaults.headers.common['x-access-token'] = authToken;
+    $localStorage.remove(TOKEN_KEY);
+  }
 
-      $resource(baseURL + "users/login")
+  authFac.login = function(loginData) {
+
+    $resource(baseURL + "users/login")
         .save(loginData,
-          function(response) {
-            storeUserCredentials({username:loginData.username, token: response.token});
-            $rootScope.$broadcast('login:Successful');
-          },
-          function(response){
-            isAuthenticated = false;
+            function(response) {
+              storeUserCredentials({username:loginData.username, token: response.token});
+              $rootScope.$broadcast('login:Successful');
+            },
+            function(response){
+              isAuthenticated = false;
 
-            var message = '<div><p>' +  response.data.err.message +
-              '</p><p>' + response.data.err.name + '</p></div>';
+              var message = '<div><p>' +  response.data.err.message +
+                  '</p><p>' + response.data.err.name + '</p></div>';
 
-            var alertPopup = $ionicPopup.alert({
-              title: '<h4>Login Failed!</h4>',
-              template: message
-            });
+              var alertPopup = $ionicPopup.alert({
+                title: '<h4>Login Failed!</h4>',
+                template: message
+              });
 
-            alertPopup.then(function(res) {
-              console.log('Login Failed!');
-            });
-          }
+              alertPopup.then(function(res) {
+                console.log('Login Failed!');
+              });
+            }
 
         );
 
-    };
+  };
 
-    authFac.logout = function() {
-      $resource(baseURL + "users/logout").get(function(response){
-      });
-      destroyUserCredentials();
-    };
+  authFac.logout = function() {
+    $resource(baseURL + "users/logout").get(function(response){
+    });
+    destroyUserCredentials();
+  };
 
-    authFac.register = function(registerData) {
+  authFac.register = function(registerData) {
 
-      $resource(baseURL + "users/register")
+    $resource(baseURL + "users/register")
         .save(registerData,
-          function(response) {
-            authFac.login({username:registerData.username, password:registerData.password});
+            function(response) {
+              authFac.login({username:registerData.username, password:registerData.password});
 
-            $rootScope.$broadcast('registration:Successful');
-          },
-          function(response){
+              $rootScope.$broadcast('registration:Successful');
+            },
+            function(response){
 
-            var message = '<div><p>' +  response.data.err.message +
-              '</p><p>' + response.data.err.name + '</p></div>';
+              var message = '<div><p>' +  response.data.err.message +
+                  '</p><p>' + response.data.err.name + '</p></div>';
 
-            var alertPopup = $ionicPopup.alert({
-              title: '<h4>Registration Failed!</h4>',
-              template: message
-            });
+              var alertPopup = $ionicPopup.alert({
+                title: '<h4>Registration Failed!</h4>',
+                template: message
+              });
 
-            alertPopup.then(function(res) {
-              console.log('Registration Failed!');
-            });
-          }
+              alertPopup.then(function(res) {
+                console.log('Registration Failed!');
+              });
+            }
 
         );
-    };
+  };
 
-    authFac.isAuthenticated = function() {
-      return isAuthenticated;
-    };
+  authFac.isAuthenticated = function() {
+    return isAuthenticated;
+  };
 
-    authFac.getUsername = function() {
-      return username;
-    };
+  authFac.getUsername = function() {
+    return username;
+  };
 
-    authFac.facebook = function() {
+  authFac.facebook = function() {
 
-    };
+  };
 
-    loadUserCredentials();
+  loadUserCredentials();
 
-    return authFac;
+  return authFac;
 
-  }])
-;
+}
+
+
+userFactory.$inject = ['$resource', 'baseURL', '$http'];
+
+function userFactory($resource, baseURL, $http) {
+
+
+  console.log($http.defaults.headers.common);
+
+  return $resource(baseURL + "users/:id", null, {
+    'update': {
+      method: 'PUT'
+    }
+  });
+
+}
+storyFactory.$inject = ['$resource', 'baseURL'];
+
+function storyFactory($resource,baseURL) {
+
+  return $resource(baseURL +"stories/:id", null, {
+    'update': {
+      method: 'PUT'
+    }
+  });
+}
+
+sprintFactory.$inject = ['$resource', 'baseURL'];
+
+function sprintFactory($resource,baseURL) {
+
+  return $resource(baseURL +"sprints/:id", null, {
+    'update': {
+      method: 'PUT'
+    }
+  });
+}

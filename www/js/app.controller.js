@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
 
 AppCtrl.$inject = ['$scope', '$ionicModal', '$timeout', 'users', 'AuthFactory', '$localStorage', '$state', 'sprintFactory', 'sprints'];
 
-function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, $localStorage, $state, sprintFactory, sprints) {
+function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints) {
 
   // Form data for the login modal
   $scope.loginData = {};
@@ -43,7 +43,7 @@ function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, $localStorag
   // Perform the login action when the user submits the login form
   $scope.doLogin = function () {
 
-    $localStorage.storeObject('userinfo', $scope.loginData);
+    localStorage.storeObject('userinfo', $scope.loginData);
 
     AuthFactory.login($scope.loginData);
     // Simulate a login delay. Remove this and replace with your login
