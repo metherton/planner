@@ -214,19 +214,17 @@ describe('Controllers', function() {
 
     var sprintCtrl;
 
-    beforeEach(inject(function($controller, $rootScope) {
-
-      scope = $rootScope.$new();
+    beforeEach(inject(function($controller) {
 
       sprintCtrl = $controller('SprintCtrl', {
-        '$scope': scope,
         'sprints': mockSprints
       });
     }));
 
     it('should set sprints on initialization', function() {
 
-      expect(scope.sprints).toBeDefined();
+      console.log('scopescp', sprintCtrl.sprints);
+      expect(sprintCtrl.sprints).toBeDefined();
     });
 
   });

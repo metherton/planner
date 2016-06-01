@@ -1,7 +1,7 @@
 <ion-view view-title="Sprints">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="sprint in sprints" href="#/app/sprints/{{sprint.id}}">
+      <ion-item ng-repeat="sprint in vm.sprints" href="#/app/sprints/{{sprint.id}}">
         {{sprint.name}}
       </ion-item>
     </ion-list>

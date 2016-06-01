@@ -89,6 +89,7 @@
             'menuContent': {
               templateUrl: 'templates/sprints.html',
               controller: 'SprintCtrl',
+              controllerAs: 'vm',
               resolve: {
                 sprints:  ['sprintFactory', '$http', function(sprintFactory, $http){
                   console.log($http.defaults.headers.common);

@@ -6,12 +6,14 @@
 
   .controller('SprintCtrl', SprintCtrl);
 
-  SprintCtrl.$inject = ['$scope', 'sprints'];
+  SprintCtrl.$inject = ['sprints'];
 
-  function SprintCtrl($scope, sprints) {
+  function SprintCtrl(sprints) {
+
+    var vm = this;
 
     console.log('in SprintCtrl');
-    $scope.sprints = sprints;
+    vm.sprints = sprints;
     console.log(sprints);
 
   }
