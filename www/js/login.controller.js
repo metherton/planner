@@ -1,9 +1,16 @@
-angular.module('starter.controllers')
+(function() {
 
-.controller('LoginCtrl', LoginCtrl);
+  'use strict';
 
-function LoginCtrl() {
+  angular.module('starter.controllers')
 
-  console.log('this is the login controller');
+  .controller('LoginCtrl', LoginCtrl);
 
-}
+  function LoginCtrl() {
+
+    console.log('this is the login controller');
+
+  }
+
+})();
+

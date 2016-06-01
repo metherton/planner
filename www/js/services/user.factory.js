@@ -1,17 +1,24 @@
-angular.module('starter.services')
-    .factory('userFactory', userFactory);
+(function() {
 
-userFactory.$inject = ['$resource', 'baseURL', '$http'];
+  'use strict';
 
-function userFactory($resource, baseURL, $http) {
+  angular.module('starter.services')
+      .factory('userFactory', userFactory);
+
+  userFactory.$inject = ['$resource', 'baseURL', '$http'];
+
+  function userFactory($resource, baseURL, $http) {
 
 
-    console.log($http.defaults.headers.common);
+      console.log($http.defaults.headers.common);
 
-    return $resource(baseURL + "users/:id", null, {
-        'update': {
-            method: 'PUT'
-        }
-    });
+      return $resource(baseURL + "users/:id", null, {
+          'update': {
+              method: 'PUT'
+          }
+      });
 
-}
+  }
+
+})();
+

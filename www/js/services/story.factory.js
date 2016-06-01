@@ -1,15 +1,19 @@
-'use strict';
+(function() {
 
-angular.module('starter.services')
-  .factory('storyFactory', storyFactory);
+  'use strict';
 
-storyFactory.$inject = ['$resource', 'baseURL'];
+  angular.module('starter.services')
+    .factory('storyFactory', storyFactory);
 
-function storyFactory($resource,baseURL) {
+  storyFactory.$inject = ['$resource', 'baseURL'];
 
-  return $resource(baseURL +"stories/:id", null, {
-    'update': {
-      method: 'PUT'
-    }
-  });
-}
+  function storyFactory($resource,baseURL) {
+
+    return $resource(baseURL +"stories/:id", null, {
+      'update': {
+        method: 'PUT'
+      }
+    });
+  }
+})();
+

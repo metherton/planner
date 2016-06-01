@@ -1,13 +1,19 @@
-angular.module('starter.controllers')
+(function() {
 
-.controller('SprintCtrl', SprintCtrl);
+  'use strict';
 
-SprintCtrl.$inject = ['$scope', 'sprints'];
+  angular.module('starter.controllers')
 
-function SprintCtrl($scope, sprints) {
+  .controller('SprintCtrl', SprintCtrl);
 
-  console.log('in SprintCtrl');
-  $scope.sprints = sprints;
-  console.log(sprints);
+  SprintCtrl.$inject = ['$scope', 'sprints'];
 
-}
+  function SprintCtrl($scope, sprints) {
+
+    console.log('in SprintCtrl');
+    $scope.sprints = sprints;
+    console.log(sprints);
+
+  }
+})();
+

@@ -1,8 +1,15 @@
-angular.module('starter.controllers')
+(function() {
+
+  'use strict';
+
+  angular.module('starter.controllers')
 
 
-.controller('PlaylistCtrl', PlaylistCtrl);
+  .controller('PlaylistCtrl', PlaylistCtrl);
 
-function PlaylistCtrl($scope, $stateParams) {
-  console.log('in PlaylistCtrl');
-}
+  function PlaylistCtrl($scope, $stateParams) {
+    console.log('in PlaylistCtrl');
+  }
+
+})();
+

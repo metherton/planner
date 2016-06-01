@@ -1,14 +1,21 @@
-angular.module('starter.controllers')
+(function() {
 
-.controller('UserCtrl', UserCtrl);
+  'use strict';
 
-UserCtrl.$inject = ['$scope', 'users'];
+  angular.module('starter.controllers')
 
-function UserCtrl($scope, users) {
+  .controller('UserCtrl', UserCtrl);
 
-  console.log('in UserCtrl');
-  $scope.users = users;
-  console.log(users);
+  UserCtrl.$inject = ['$scope', 'users'];
 
-}
+  function UserCtrl($scope, users) {
+
+    console.log('in UserCtrl');
+    $scope.users = users;
+    console.log(users);
+
+  }
+
+})();
+
 

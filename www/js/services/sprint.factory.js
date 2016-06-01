@@ -1,15 +1,19 @@
-'use strict';
+(function() {
 
-angular.module('starter.services')
-  .factory('sprintFactory', sprintFactory);
+  'use strict';
 
-sprintFactory.$inject = ['$resource', 'baseURL'];
+  angular.module('starter.services')
+    .factory('sprintFactory', sprintFactory);
 
-function sprintFactory($resource,baseURL) {
+  sprintFactory.$inject = ['$resource', 'baseURL'];
 
-  return $resource(baseURL +"sprints/:id", null, {
-    'update': {
-      method: 'PUT'
-    }
-  });
-}
+  function sprintFactory($resource,baseURL) {
+
+    return $resource(baseURL +"sprints/:id", null, {
+      'update': {
+        method: 'PUT'
+      }
+    });
+  }
+})();
+
