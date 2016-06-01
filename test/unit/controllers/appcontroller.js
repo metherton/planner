@@ -222,8 +222,6 @@ describe('Controllers', function() {
     }));
 
     it('should set sprints on initialization', function() {
-
-      console.log('scopescp', sprintCtrl.sprints);
       expect(sprintCtrl.sprints).toBeDefined();
     });
 
