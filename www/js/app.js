@@ -39,6 +39,7 @@
           abstract: true,
           templateUrl: 'templates/sidebar.html',
           controller: 'AppCtrl',
+          controllerAs: 'vm',
           resolve: {
             users: ['userFactory', '$http', function (userFactory, $http) {
               return userFactory.query();
@@ -72,6 +73,7 @@
             'menuContent': {
               templateUrl: 'templates/users.html',
               controller: 'UserCtrl',
+              controllerAs: 'vm',
               cache: false,
               resolve: {
                 users:  ['userFactory', '$http', function(userFactory, $http){

@@ -6,50 +6,52 @@
 
   .controller('AppCtrl', AppCtrl);
 
-  AppCtrl.$inject = ['$scope', '$ionicModal', '$timeout', 'users', 'AuthFactory', '$localStorage', '$state', 'sprintFactory', 'sprints'];
+  AppCtrl.$inject = ['$ionicModal', '$timeout', 'users', 'AuthFactory', '$localStorage', '$state', 'sprintFactory', 'sprints'];
 
-  function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints) {
+  function AppCtrl($ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints) {
+
+    var vm = this;
 
     // Form data for the login modal
-    $scope.loginData = {};
+    vm.loginData = {};
     //$scope.reservation = {};
     //$scope.registration = {};
-    $scope.loggedIn = false;
-    $scope.sprint = {};
+    vm.loggedIn = false;
+    vm.sprint = {};
 
 
     //$scope.story = {};
-    $scope.users = users;
-    $scope.sprints = sprints;
+    vm.users = users;
+    vm.sprints = sprints;
 
     if (AuthFactory.isAuthenticated()) {
-      $scope.loggedIn = true;
-      $scope.username = AuthFactory.getUsername();
+      vm.loggedIn = true;
+      vm.username = AuthFactory.getUsername();
     }
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
-      scope: $scope
+      scope: vm
     }).then(function (modal) {
-      $scope.modal = modal;
+      vm.modal = modal;
     });
 
     // Triggered in the login modal to close it
-    $scope.closeLogin = function () {
-      $scope.modal.hide();
+    vm.closeLogin = function () {
+      vm.modal.hide();
     };
 
     // Open the login modal
-    $scope.login = function () {
-      $scope.modal.show();
+    vm.login = function () {
+      vm.modal.show();
     };
 
     // Perform the login action when the user submits the login form
-    $scope.doLogin = function () {
+    vm.doLogin = function () {
 
-      localStorage.storeObject('userinfo', $scope.loginData);
+      localStorage.storeObject('userinfo', vm.loginData);
 
-      AuthFactory.login($scope.loginData);
+      AuthFactory.login(vm.loginData);
       // Simulate a login delay. Remove this and replace with your login
       // code if using a login system
 
@@ -57,37 +59,37 @@
       $state.reload();
 
       $timeout(function () {
-        $scope.closeLogin();
+        vm.closeLogin();
       }, 1000);
     };
 
-    $scope.logOut = function () {
+    vm.logOut = function () {
       AuthFactory.logout();
-      $scope.loggedIn = false;
-      $scope.username = '';
+      vm.loggedIn = false;
+      vm.username = '';
     };
 
     $ionicModal.fromTemplateUrl('templates/createSprint.html', {
-      scope: $scope
+      scope: vm
     }).then(function (modal) {
-      $scope.createSprintForm = modal;
+      vm.createSprintForm = modal;
     });
 
     // Triggered in the reserve modal to close it
-    $scope.closeCreateSprint = function () {
-      $scope.createSprintForm.hide();
+    vm.closeCreateSprint = function () {
+      vm.createSprintForm.hide();
     };
 
     // Open the reserve modal
-    $scope.createSprint = function () {
-      $scope.createSprintForm.show();
+    vm.createSprint = function () {
+      vm.createSprintForm.show();
     };
 
     // Perform the reserve action when the user submits the reserve form
-    $scope.doCreateSprint = function () {
-      console.log('Doing create sprint', $scope.sprint);
+    vm.doCreateSprint = function () {
+      console.log('Doing create sprint', vm.sprint);
 
-      sprintFactory.save($scope.sprint).$promise.then(function (response) {
+      sprintFactory.save(vm.sprint).$promise.then(function (response) {
         console.log(response.data);
       });
 
@@ -95,36 +97,36 @@
       // Simulate a reservation delay. Remove this and replace with your reservation
       // code if using a server system
       $timeout(function () {
-        $scope.closeCreateSprint();
+        vm.closeCreateSprint();
       }, 1000);
     };
     //
     $ionicModal.fromTemplateUrl('templates/createStory.html', {
-      scope: $scope
+      scope: vm
     }).then(function (modal) {
-      $scope.createStoryForm = modal;
+      vm.createStoryForm = modal;
     });
     //
     //// Triggered in the reserve modal to close it
-    $scope.closeCreateStory = function () {
-      $scope.createStoryForm.hide();
+    vm.closeCreateStory = function () {
+      vm.createStoryForm.hide();
     };
     //
     //// Open the reserve modal
-    $scope.createStory = function () {
-      $scope.createStoryForm.show();
+    vm.createStory = function () {
+      vm.createStoryForm.show();
     };
     //
-    $scope.doCreateStory = function () {
-      console.log('Doing create story', $scope.story);
+    vm.doCreateStory = function () {
+      console.log('Doing create story', vm.story);
 
-      storyFactory.save($scope.story);
+      storyFactory.save(vm.story);
 
 
       // Simulate a reservation delay. Remove this and replace with your reservation
       // code if using a server system
       $timeout(function () {
-        $scope.closeCreateStory();
+        vm.closeCreateStory();
       }, 1000);
     }
   }

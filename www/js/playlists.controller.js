@@ -6,10 +6,12 @@
 
   .controller('PlaylistsCtrl', PlaylistsCtrl);
 
-  function PlaylistsCtrl($scope) {
+  function PlaylistsCtrl() {
     console.log('in PlaylistsCtrl');
 
-    $scope.playlists = [
+    var vm = this;
+
+    vm.playlists = [
       { title: 'Reggae', id: 1 },
       { title: 'Chill', id: 2 },
       { title: 'Dubstep', id: 3 },

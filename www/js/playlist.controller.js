@@ -7,7 +7,7 @@
 
   .controller('PlaylistCtrl', PlaylistCtrl);
 
-  function PlaylistCtrl($scope, $stateParams) {
+  function PlaylistCtrl($stateParams) {
     console.log('in PlaylistCtrl');
   }
 

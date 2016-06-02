@@ -64,49 +64,52 @@ describe('Controllers', function() {
         $provide.value('sprintFactory', mockSprintFactory);
       }));
 
-      beforeEach(inject(function($controller, $rootScope, _$q_) {
+      beforeEach(inject(function($controller, _$q_) {
         $q = _$q_;
 
         deferredSave = $q.defer();
 
         mockSprintFactory.save = jasmine.createSpy('save').and.returnValue(deferredSave.promise);
 
-        scope = $rootScope.$new();
-
-        scope.modal = {
-          hide: jasmine.createSpy('hide'),
-          show: jasmine.createSpy('show')
-        };
 
         AppCtrl = $controller('AppCtrl', {
-          $scope: scope,
           $ionicModal: mockIonicModal,
           users: mockUsers,
           AuthFactory: mockAuthFactory,
           sprints: mockSprints
         });
+
+        AppCtrl.modal = {
+          hide: jasmine.createSpy('hide'),
+          show: jasmine.createSpy('show')
+        };
+
+
+
       }));
 
-      it('should initialize scope variables', function() {
-        expect(scope.loginData).toBeDefined();
-        expect(scope.users).toBeDefined();
-        expect(scope.sprints).toBeDefined();
 
-        expect(scope.loggedIn).toBeFalsy();
+      it('should initialize scope variables', function() {
+        expect(AppCtrl.loginData).toBeDefined();
+        expect(AppCtrl.users).toBeDefined();
+        expect(AppCtrl.sprints).toBeDefined();
+
+        expect(AppCtrl.loggedIn).toBeFalsy();
       });
 
       it('should hide modal when login closed', function() {
-        scope.closeLogin();
-        expect(scope.modal.hide).toHaveBeenCalled();
+        AppCtrl.closeLogin();
+        expect(AppCtrl.modal.hide).toHaveBeenCalled();
       });
 
       it('should show modal when login opened', function() {
-        scope.login();
-        expect(scope.modal.show).toHaveBeenCalled();
+        AppCtrl.login();
+        expect(AppCtrl.modal.show).toHaveBeenCalled();
       });
 
       it('should logout from AuthFactory', function() {
-        scope.logOut();
+        console.log('appc', AppCtrl);
+        AppCtrl.logOut();
         expect(mockAuthFactory.logout).toHaveBeenCalled();
       });
 
@@ -144,60 +147,58 @@ describe('Controllers', function() {
         mockSprintFactory.save = jasmine.createSpy('save').and.returnValue({$promise: deferredSave.promise});
 
 
-        scope = $rootScope.$new();
-
-        scope.modal = {
-          hide: jasmine.createSpy('hide'),
-          show: jasmine.createSpy('show')
-        };
-
-        scope.createSprintForm = {
-          hide: jasmine.createSpy('hide'),
-          show: jasmine.createSpy('show')
-        };
 
         AppCtrl = $controller('AppCtrl', {
-          $scope: scope,
           $ionicModal: mockIonicModal,
           users: mockUsers,
           AuthFactory: mockAuthFactory,
           sprints: mockSprints
         });
 
+        AppCtrl.modal = {
+          hide: jasmine.createSpy('hide'),
+          show: jasmine.createSpy('show')
+        };
+
+        AppCtrl.createSprintForm = {
+          hide: jasmine.createSpy('hide'),
+          show: jasmine.createSpy('show')
+        };
+
 
       }));
 
       it('should set user name if user is authenticated', function() {
-        expect(scope.username).toBe('martin');
+        expect(AppCtrl.username).toBe('martin');
       });
 
       it('should store object locally on login', function() {
-        scope.doLogin();
+        AppCtrl.doLogin();
         expect(mockLocalStorage.storeObject).toHaveBeenCalled();
         expect(mockState.reload).toHaveBeenCalled();
       });
 
       it('should put modal on the scope', function() {
         deferredModal.resolve('newmodal');
-        scope.$digest();
+       // $rootScope.$digest();
         // expect(scope.modal).toBe('newmodal'); //works but not second time cos it is comparing against set up modal
-        expect(scope.modal).toBeDefined();
+        expect(AppCtrl.modal).toBeDefined();
       });
 
       it('should hide create sprint form', function() {
 
-        scope.closeCreateSprint();
-        expect(scope.createSprintForm.hide).toHaveBeenCalled();
+        AppCtrl.closeCreateSprint();
+        expect(AppCtrl.createSprintForm.hide).toHaveBeenCalled();
       });
 
       it('should show create sprint form', function() {
 
-        scope.createSprint();
-        expect(scope.createSprintForm.show).toHaveBeenCalled();
+        AppCtrl.createSprint();
+        expect(AppCtrl.createSprintForm.show).toHaveBeenCalled();
       });
 
       it('should save sprint', function() {
-        scope.doCreateSprint();
+        AppCtrl.doCreateSprint();
         expect(mockSprintFactory.save).toHaveBeenCalled();
       });
 

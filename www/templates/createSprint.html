@@ -2,23 +2,23 @@
   <ion-header-bar>
     <h1 class="title">Create Sprint</h1>
     <div class="buttons">
-      <button class="button button-clear" ng-click="closeCreateSprint()">Close</button>
+      <button class="button button-clear" ng-click="vm.closeCreateSprint()">Close</button>
     </div>
   </ion-header-bar>
   <ion-content>
-    <form id="createSprintForm" name="createSprintForm" ng-submit="doCreateSprint()">
+    <form id="createSprintForm" name="createSprintForm" ng-submit="vm.doCreateSprint()">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Name</span>
-          <input type="text" ng-model="sprint.name">
+          <input type="text" ng-model="vm.sprint.name">
         </label>
         <label class="item item-input">
           <span class="input-label">Begin Date</span>
-          <input type="date" ng-model="sprint.beginDate">
+          <input type="date" ng-model="vm.sprint.beginDate">
         </label>
         <label class="item item-input">
           <span class="input-label">End Date</span>
-          <input type="date" ng-model="sprint.endDate">
+          <input type="date" ng-model="vm.sprint.endDate">
         </label>
         <label class="item">
           <button class="button button-block button-positive" type="submit">Create</button>

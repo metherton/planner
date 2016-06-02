@@ -6,34 +6,34 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form id="createStoryForm" name="createStoryForm" ng-submit="doCreateStory()">
+    <form id="createStoryForm" name="createStoryForm" ng-submit="vm.doCreateStory()">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Description</span>
-          <input type="text" ng-model="story.description">
+          <input type="text" ng-model="vm.story.description">
         </label>
         <label class="item item-input item-select">
           <span class="input-label">Story Points</span>
-          <select ng-model="story.points">
+          <select ng-model="vm.story.points">
             <option ng-repeat="n in [1,2,3,5,8,13]" value="{{n}}">{{n}}</option>
           </select>
         </label>
         <label class="item item-input item-select">
           <span class="input-label">Assignee</span>
-          <select ng-model="story.assignee">
-            <option ng-repeat="user in users" value="{{user}}">{{user.username}}</option>
+          <select ng-model="vm.story.assignee">
+            <option ng-repeat="user in vm.users" value="{{user}}">{{user.username}}</option>
           </select>
         </label>
         <label class="item item-input item-select">
           <span class="input-label">Status</span>
-          <select ng-model="story.status">
+          <select ng-model="vm.story.status">
             <option ng-repeat="status in ['unassigned', 'in progress', 'done']" value="{{status}}">{{status}}</option>
           </select>
         </label>
         <li class="item item-toggle">
           Recurring ?
           <label class="toggle toggle-assertive">
-            <input type="checkbox" ng-model="story.recurring">
+            <input type="checkbox" ng-model="vm.story.recurring">
             <div class="track">
               <div class="handle">
               </div>

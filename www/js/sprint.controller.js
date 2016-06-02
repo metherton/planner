@@ -12,10 +12,7 @@
 
     var vm = this;
 
-    console.log('in SprintCtrl');
     vm.sprints = sprints;
-    console.log(sprints);
-
   }
 })();
 

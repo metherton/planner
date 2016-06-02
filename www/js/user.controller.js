@@ -6,12 +6,13 @@
 
   .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = ['$scope', 'users'];
+  UserCtrl.$inject = ['users'];
 
-  function UserCtrl($scope, users) {
+  function UserCtrl(users) {
 
+    var vm = this;
     console.log('in UserCtrl');
-    $scope.users = users;
+    vm.users = users;
     console.log(users);
 
   }
