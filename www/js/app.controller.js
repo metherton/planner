@@ -6,9 +6,9 @@
 
   .controller('AppCtrl', AppCtrl);
 
-  AppCtrl.$inject = ['$ionicModal', '$timeout', 'users', 'AuthFactory', '$localStorage', '$state', 'sprintFactory', 'sprints'];
+  AppCtrl.$inject = ['$scope', '$ionicModal', '$timeout', 'users', 'AuthFactory', '$localStorage', '$state', 'sprintFactory', 'sprints'];
 
-  function AppCtrl($ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints) {
+  function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints) {
 
     var vm = this;
 
@@ -31,7 +31,7 @@
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
-      scope: vm
+      scope: $scope
     }).then(function (modal) {
       vm.modal = modal;
     });
@@ -70,7 +70,7 @@
     };
 
     $ionicModal.fromTemplateUrl('templates/createSprint.html', {
-      scope: vm
+      scope: $scope
     }).then(function (modal) {
       vm.createSprintForm = modal;
     });
@@ -102,7 +102,7 @@
     };
     //
     $ionicModal.fromTemplateUrl('templates/createStory.html', {
-      scope: vm
+      scope: $scope
     }).then(function (modal) {
       vm.createStoryForm = modal;
     });

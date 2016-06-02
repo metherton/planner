@@ -107,7 +107,8 @@
           views: {
             'menuContent': {
               templateUrl: 'templates/home.html',
-              controller: 'PlaylistsCtrl'
+              controller: 'PlaylistsCtrl',
+              controllerAs: 'vm'
             }
           }
         })
@@ -119,7 +120,8 @@
           views: {
             'menuContent': {
               templateUrl: 'templates/playlist.html',
-              controller: 'PlaylistCtrl'
+              controller: 'PlaylistCtrl',
+              controllerAs: 'vm'
             }
           }
         });
