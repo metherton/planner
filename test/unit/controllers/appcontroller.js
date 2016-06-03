@@ -3,7 +3,7 @@
 describe('Controllers', function() {
 
   var AppCtrl, scope, mockIonicModal, $q, deferredModal, mockUsers, mockAuthFactory,
-      mockLocalStorage, mockState, mockSprintFactory, deferredSave, mockSprints;
+      mockLocalStorage, mockState, mockSprintFactory, deferredSave, mockSprints, scope, mockStoryFactory;
 
 
     beforeEach(module('starter.controllers'));
@@ -29,7 +29,10 @@ describe('Controllers', function() {
 
           mockSprintFactory = {
             //save: jasmine.createSpy('save').and.returnValue(deferredSave.promise)
-          }
+          },
+        mockStoryFactory = {
+          //save: jasmine.createSpy('save').and.returnValue(deferredSave.promise)
+        }
       ;
 
     });
@@ -62,17 +65,22 @@ describe('Controllers', function() {
         $provide.value('$localStorage', mockLocalStorage);
         $provide.value('$state', mockState);
         $provide.value('sprintFactory', mockSprintFactory);
+        $provide.value('storyFactory', mockStoryFactory);
       }));
 
-      beforeEach(inject(function($controller, _$q_) {
+      beforeEach(inject(function($controller, _$q_, $rootScope) {
         $q = _$q_;
+
+        scope = $rootScope.$new();
 
         deferredSave = $q.defer();
 
         mockSprintFactory.save = jasmine.createSpy('save').and.returnValue(deferredSave.promise);
+        mockStoryFactory.save = jasmine.createSpy('save').and.returnValue(deferredSave.promise);
 
 
         AppCtrl = $controller('AppCtrl', {
+          $scope: scope,
           $ionicModal: mockIonicModal,
           users: mockUsers,
           AuthFactory: mockAuthFactory,
@@ -137,18 +145,23 @@ describe('Controllers', function() {
         $provide.value('$localStorage', mockLocalStorage);
         $provide.value('$state', mockState);
         $provide.value('sprintFactory', mockSprintFactory);
+        $provide.value('storyFactory', mockStoryFactory);
       }));
 
       beforeEach(inject(function($controller, $rootScope, _$q_) {
         $q = _$q_;
 
+        scope = $rootScope.$new();
+
         deferredSave = $q.defer();
 
         mockSprintFactory.save = jasmine.createSpy('save').and.returnValue({$promise: deferredSave.promise});
 
+        mockStoryFactory.save = jasmine.createSpy('save').and.returnValue({$promise: deferredSave.promise});
 
 
         AppCtrl = $controller('AppCtrl', {
+          $scope: scope,
           $ionicModal: mockIonicModal,
           users: mockUsers,
           AuthFactory: mockAuthFactory,

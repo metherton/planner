@@ -2,7 +2,7 @@
   <ion-header-bar>
     <h1 class="title">Create Story</h1>
     <div class="buttons">
-      <button class="button button-clear" ng-click="closeCreateStory()">Close</button>
+      <button class="button button-clear" ng-click="vm.closeCreateStory()">Close</button>
     </div>
   </ion-header-bar>
   <ion-content>
@@ -21,7 +21,7 @@
         <label class="item item-input item-select">
           <span class="input-label">Assignee</span>
           <select ng-model="vm.story.assignee">
-            <option ng-repeat="user in vm.users" value="{{user}}">{{user.username}}</option>
+            <option ng-repeat="user in vm.users" value="{{user._id}}">{{user.username}}</option>
           </select>
         </label>
         <label class="item item-input item-select">
