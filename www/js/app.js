@@ -30,10 +30,7 @@
 
     .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
-
-
       $stateProvider
-
         .state('app', {
           url: '/app',
           abstract: true,
@@ -46,6 +43,9 @@
             }],
             sprints: ['sprintFactory', '$http', function (sprintFactory, $http) {
               return sprintFactory.query();
+            }],
+            stories: ['storyFactory', '$http', function (storyFactory, $http) {
+              return storyFactory.query();
             }]
           }
         })
@@ -96,19 +96,49 @@
                 sprints:  ['sprintFactory', '$http', function(sprintFactory, $http){
                   console.log($http.defaults.headers.common);
                   return sprintFactory.query();
+                }],
+                sprint: ['sprintFactory', '$http', function(sprintFactory, $http){
+                  return sprintFactory.get({id:0});
                 }]
 
               }
             }
           }
         })
-        .state('app.playlists', {
-          url: '/home',
+        .state('app.stories', {
+          url: '/stories',
           views: {
             'menuContent': {
-              templateUrl: 'templates/home.html',
-              controller: 'PlaylistsCtrl',
-              controllerAs: 'vm'
+              templateUrl: 'templates/stories.html',
+              controller: 'StoryCtrl',
+              controllerAs: 'vm',
+              resolve: {
+                sprints:  ['storyFactory', '$http', function(storyFactory, $http){
+                  console.log($http.defaults.headers.common);
+                  return storyFactory.query();
+                }]
+
+              }
+            }
+          }
+        })
+        .state('app.currentSprint', {
+          url: '/currentSprint',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/currentSprint.html',
+              controller: 'SprintCtrl',
+              controllerAs: 'vm',
+              resolve: {
+                sprints:  ['sprintFactory', '$http', function(sprintFactory, $http){
+                  console.log($http.defaults.headers.common);
+                  return sprintFactory.query();
+                }],
+                sprint: ['sprintFactory', '$http', function(sprintFactory, $http){
+                  return sprintFactory.get({id:0});
+                }]
+
+              }
             }
           }
         })
@@ -127,7 +157,7 @@
         });
       // if none of the above states are matched, use this as the fallback
       //$urlRouterProvider.otherwise('/app/home');
-      $urlRouterProvider.otherwise('/app/home');
+      $urlRouterProvider.otherwise('/app/currentSprint');
     });
 
 

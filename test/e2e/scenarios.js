@@ -41,4 +41,11 @@ describe('planner App E2E Testing', function() {
     expect(page.linksHeader.getText()).toEqual('Sprints');
   });
 
+  it('should open stories list', function() {
+    page.menuOpener.click();
+    expect(page.leftMenuHeader.getText()).toEqual('Navigation');
+    page.storiesLink.click();
+    expect(page.linksHeader.getText()).toEqual('Stories');
+  });
+
 });

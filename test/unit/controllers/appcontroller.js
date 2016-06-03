@@ -3,7 +3,8 @@
 describe('Controllers', function() {
 
   var AppCtrl, scope, mockIonicModal, $q, deferredModal, mockUsers, mockAuthFactory,
-      mockLocalStorage, mockState, mockSprintFactory, deferredSave, mockSprints, scope, mockStoryFactory;
+      mockLocalStorage, mockState, mockSprintFactory, deferredSave, mockSprints, scope, mockStoryFactory,
+      mockStories;
 
 
     beforeEach(module('starter.controllers'));
@@ -12,6 +13,7 @@ describe('Controllers', function() {
 
       mockUsers = ['martin', 'fred'],
           mockSprints = ['sprint1', 'sprint2'],
+          mockStories = ['story1', 'story2'],
 
           mockIonicModal = {
             fromTemplateUrl: function() {
@@ -84,7 +86,8 @@ describe('Controllers', function() {
           $ionicModal: mockIonicModal,
           users: mockUsers,
           AuthFactory: mockAuthFactory,
-          sprints: mockSprints
+          sprints: mockSprints,
+          stories: mockStories
         });
 
         AppCtrl.modal = {
@@ -101,6 +104,7 @@ describe('Controllers', function() {
         expect(AppCtrl.loginData).toBeDefined();
         expect(AppCtrl.users).toBeDefined();
         expect(AppCtrl.sprints).toBeDefined();
+        expect(AppCtrl.stories).toBeDefined();
 
         expect(AppCtrl.loggedIn).toBeFalsy();
       });
@@ -165,7 +169,8 @@ describe('Controllers', function() {
           $ionicModal: mockIonicModal,
           users: mockUsers,
           AuthFactory: mockAuthFactory,
-          sprints: mockSprints
+          sprints: mockSprints,
+          stories: mockStories
         });
 
         AppCtrl.modal = {
@@ -237,6 +242,23 @@ describe('Controllers', function() {
 
     it('should set sprints on initialization', function() {
       expect(sprintCtrl.sprints).toBeDefined();
+    });
+
+  });
+
+  describe('StoryCtrl', function() {
+
+    var storyCtrl;
+
+    beforeEach(inject(function($controller) {
+
+      storyCtrl = $controller('StoryCtrl', {
+        'stories': mockStories
+      });
+    }));
+
+    it('should set stories on initialization', function() {
+      expect(storyCtrl.stories).toBeDefined();
     });
 
   });

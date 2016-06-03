@@ -6,13 +6,14 @@
 
   .controller('SprintCtrl', SprintCtrl);
 
-  SprintCtrl.$inject = ['sprints'];
+  SprintCtrl.$inject = ['sprints', 'sprint'];
 
-  function SprintCtrl(sprints) {
+  function SprintCtrl(sprints, sprint) {
 
     var vm = this;
 
     vm.sprints = sprints;
+    vm.sprint = sprint;
   }
 })();
 

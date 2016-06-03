@@ -6,9 +6,9 @@
 
   .controller('AppCtrl', AppCtrl);
 
-  AppCtrl.$inject = ['$scope', '$ionicModal', '$timeout', 'users', 'AuthFactory', '$localStorage', '$state', 'sprintFactory', 'sprints', 'storyFactory'];
+  AppCtrl.$inject = ['$scope', '$ionicModal', '$timeout', 'users', 'AuthFactory', '$localStorage', '$state', 'sprintFactory', 'sprints', 'storyFactory', 'stories'];
 
-  function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints, storyFactory) {
+  function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints, storyFactory, stories) {
 
     var vm = this;
 
@@ -23,6 +23,7 @@
     //$scope.story = {};
     vm.users = users;
     vm.sprints = sprints;
+    vm.stories = stories;
 
     if (AuthFactory.isAuthenticated()) {
       vm.loggedIn = true;
