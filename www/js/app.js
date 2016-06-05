@@ -127,12 +127,12 @@
           views: {
             'menuContent': {
               templateUrl: 'templates/currentSprint.html',
-              controller: 'SprintCtrl',
+              controller: 'CurrentSprintCtrl',
               controllerAs: 'vm',
               resolve: {
-                sprints:  ['sprintFactory', '$http', function(sprintFactory, $http){
+                stories:  ['storyFactory', '$http', function(storyFactory, $http){
                   console.log($http.defaults.headers.common);
-                  return sprintFactory.query();
+                  return storyFactory.query();
                 }],
                 sprint: ['sprintFactory', '$http', function(sprintFactory, $http){
                   return sprintFactory.get({id:0});

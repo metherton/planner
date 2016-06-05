@@ -17,7 +17,7 @@ HomePage.prototype = Object.create({}, {
   usersLink: {get: function () { return element(by.xpath('/html/body/ion-nav-view/ion-side-menus/ion-side-menu/ion-content/div[1]/ion-list/div/ion-item[5]/a')); }},
   sprintsLink: {get: function () { return element(by.xpath('/html/body/ion-nav-view/ion-side-menus/ion-side-menu/ion-content/div[1]/ion-list/div/ion-item[4]/a')); }},
   storiesLink: {get: function () { return element(by.xpath('/html/body/ion-nav-view/ion-side-menus/ion-side-menu/ion-content/div[1]/ion-list/div/ion-item[6]/a')); }},
-
+  sprintListHeader: {get: function() {return element(by.xpath('//h4'));} },
 
   createSprintHeader: {get: function () { return element(by.xpath('/html/body/div[3]/div[2]/ion-modal-view/ion-header-bar/h1')); }},
   addTodo: { value: function (todo) {

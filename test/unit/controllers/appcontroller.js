@@ -4,7 +4,7 @@ describe('Controllers', function() {
 
   var AppCtrl, scope, mockIonicModal, $q, deferredModal, mockUsers, mockAuthFactory,
       mockLocalStorage, mockState, mockSprintFactory, deferredSave, mockSprints, scope, mockStoryFactory,
-      mockStories;
+      mockStories, mockSprint;
 
 
     beforeEach(module('starter.controllers'));
@@ -13,6 +13,7 @@ describe('Controllers', function() {
 
       mockUsers = ['martin', 'fred'],
           mockSprints = ['sprint1', 'sprint2'],
+          mockSprint = {description: 'current sprint'};
           mockStories = ['story1', 'story2'],
 
           mockIonicModal = {
@@ -42,15 +43,8 @@ describe('Controllers', function() {
 
   describe('Controller: AppCtrl', function() {
 
-
-
-
-
-
-
     describe('not authenticated', function() {
       beforeEach(function() {
-
             mockAuthFactory = {
               logout: jasmine.createSpy('logout'),
               //isAuthenticated: isAuthed,
@@ -94,8 +88,6 @@ describe('Controllers', function() {
           hide: jasmine.createSpy('hide'),
           show: jasmine.createSpy('show')
         };
-
-
 
       }));
 
@@ -236,7 +228,8 @@ describe('Controllers', function() {
     beforeEach(inject(function($controller) {
 
       sprintCtrl = $controller('SprintCtrl', {
-        'sprints': mockSprints
+        'sprints': mockSprints,
+        'sprint': mockSprint
       });
     }));
 
