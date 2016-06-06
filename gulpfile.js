@@ -11,7 +11,18 @@ var paths = {
   sass: ['./scss/**/*.scss']
 };
 
+var gulpNgConfig = require('gulp-ng-config');
+ 
+gulp.task('config', function () {
+  gulp.src('/etc/scrumtool/config.json')
+  .pipe(gulpNgConfig('starter.config'))
+  .pipe(gulp.dest('./www/js'))
+});
+
+
 gulp.task('default', ['sass']);
+
+
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
