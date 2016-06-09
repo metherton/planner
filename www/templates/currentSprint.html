@@ -1,19 +1,50 @@
-<ion-view view-title="Current Sprint">
+<ion-view view-title="{{vm.sprint.name}} from {{vm.sprint.beginDate | date : 'EEE d MMM'}} to {{vm.sprint.endDate  | date : 'EEE d MMM'}} ">
   <ion-content>
-    <div class="card">
-      <div class="item item-body item-text-wrap">
-        <h2>{{vm.sprint.name}}</h2>
+
+    <div class="row">
+      <div class="col text-center">
+        <div class="item assertive-bg">
+          <h2 class="title" style="color: white">To Do</h2>
+        </div>
+      </div>
+      <div class="col text-center">
+        <div class="item energized-bg">
+          <h2 class="title" style="color: white">Doing</h2>
+        </div>
+      </div>
+      <div class="col text-center">
+        <div class="item balanced-bg">
+          <h2 class="title" style="color: white">Done</h2>
+        </div>
+       </div>
     </div>
     <div class="row">
-      <div class="col col-offset-10">
-        <h4>Stories</h4>
-        <ul class="list">
-          <li ng-repeat="story in vm.stories">
-            <blockquote>
-              <p>{{story.description}}</p>
-            </blockquote>
-          </li>
-        </ul>
+      <div class="col">
+        <div class="item assertive-border">
+          &nbsp;
+        </div>
+      </div>
+      <div class="col">
+          <div class="item energized-border">
+            &nbsp;
+          </div>
+      </div>
+      <div class="col">
+        <div class="item balanced-border">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="item item-divider text-center">
+        <h2>Stories</h2>
+      </div>
+      <div class="item">
+        <div class="row">
+            <div class="col text-center" ng-repeat="story in vm.stories">
+                <div class="item" style="border-style: dashed; border-width: thin">{{story.description}}</div>
+            </div>
+        </div>
       </div>
     </div>
   </ion-content>
