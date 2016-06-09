@@ -9,7 +9,7 @@
 
   function sprintFactory($resource,baseURL) {
 
-    return $resource(baseURL +"sprints/:id", null, {
+    return $resource(baseURL +"sprints/:id", { id: '@_id' }, {
       'update': {
         method: 'PUT'
       }

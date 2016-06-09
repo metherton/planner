@@ -42,7 +42,7 @@
       <div class="item">
         <div class="row">
             <div class="col text-center" ng-repeat="story in vm.stories">
-                <div class="item" style="border-style: dashed; border-width: thin">{{story.description}}</div>
+                <ion-item on-swipe-up="vm.onSwipeUp()" ng-click="vm.onSwipeUp(story._id)" style="border-style: dashed; border-width: thin">{{story.description}}</ion-item>
             </div>
         </div>
       </div>
