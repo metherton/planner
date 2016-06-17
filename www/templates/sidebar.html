@@ -24,9 +24,12 @@
         <ion-item menu-close href="#/app/aboutus">
           About Us
         </ion-item>
-        <ion-item menu-close href="#/app/sprints/{{currentSprintId}}">
+        <ion-item menu-close href="#/app/currentSprint">
           Current Sprint
         </ion-item>
+        <!--<ion-item menu-close href="#/app/sprints/{{currentSprintId}}">-->
+          <!--Current Sprint-->
+        <!--</ion-item>-->
         <ion-item menu-close href="#/app/sprints">
           Sprints
         </ion-item>
@@ -39,7 +42,7 @@
         <ion-item class="item-divider">
           Services
         </ion-item>
-        <ion-item menu-close ng-click="vm.login()">
+        <ion-item menu-close href="#/app/login">
           Login
         </ion-item>
         <ion-item menu-close ng-click="vm.register()">

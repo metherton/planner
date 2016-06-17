@@ -67,6 +67,24 @@
             }
           }
         })
+        .state('app.login', {
+          url: '/login',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/login.html',
+              controller: 'LoginCtrl',
+              controllerAs: 'vm',
+              cache: false,
+              resolve: {
+                users:  ['userFactory', '$http', function(userFactory, $http){
+                  console.log($http.defaults.headers.common);
+                  return userFactory.query();
+                }]
+
+              }
+            }
+          }
+        })
         .state('app.users', {
           url: '/users',
           views: {
@@ -157,7 +175,7 @@
         });
       // if none of the above states are matched, use this as the fallback
       //$urlRouterProvider.otherwise('/app/home');
-      $urlRouterProvider.otherwise('/app/currentSprint');
+      $urlRouterProvider.otherwise('/app/login');
     });
 
 

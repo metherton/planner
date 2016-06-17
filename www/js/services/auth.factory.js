@@ -5,9 +5,9 @@
   angular.module('starter.services')
     .factory('AuthFactory', AuthFactory);
 
-  AuthFactory.$inject = ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup'];
+  AuthFactory.$inject = ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup', '$state', '$window', '$timeout'];
 
-  function AuthFactory($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup) {
+  function AuthFactory($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup, $state, $window, $timeout) {
 
     var authFac = {};
     var TOKEN_KEY = 'Token';
@@ -52,6 +52,12 @@
           function(response) {
             storeUserCredentials({username:loginData.username, token: response.token});
             $rootScope.$broadcast('login:Successful');
+            console.log('logged in ok');
+            //$timeout(function () {
+              $state.go('app.currentSprint');
+              //$state.reload();
+              //$window.location.reload(true);
+            //}, 1000);
           },
           function(response){
             isAuthenticated = false;

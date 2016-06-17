@@ -25,8 +25,12 @@
     //    console.log(response.data);
     ////    $scope.$apply();
     //  });
-      sprintFactory.update({id: vm.sprint._id}, vm.sprint).$promise.then(refreshData);
+      sprintFactory.update({id: vm.sprint._id}, vm.sprint).$promise.then(refreshData, handleError);
 
+    }
+
+    function handleError(error) {
+      console.log('error', error);
     }
 
     function refreshData() {

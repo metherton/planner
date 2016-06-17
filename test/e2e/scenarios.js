@@ -49,4 +49,13 @@ describe('planner App E2E Testing', function() {
     expect(page.linksHeader.getText()).toEqual('Stories');
   });
 
+  it('should open login popup', function() {
+    page.menuOpener.click();
+    expect(page.leftMenuHeader.getText()).toEqual('Navigation');
+    page.loginLink.click();
+    expect(page.loginHeader.getText()).toEqual('Login');
+    expect(browser.getLocationAbsUrl()).toMatch('/app/login');
+
+  });
+
 });
