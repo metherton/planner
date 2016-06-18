@@ -5,9 +5,9 @@
   angular.module('starter.services')
     .factory('AuthFactory', AuthFactory);
 
-  AuthFactory.$inject = ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup', '$state', '$window', '$timeout'];
+  AuthFactory.$inject = ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup', '$state', '$window', '$timeout', '$q'];
 
-  function AuthFactory($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup, $state, $window, $timeout) {
+  function AuthFactory($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup, $state, $window, $timeout, $q) {
 
     var authFac = {};
     var TOKEN_KEY = 'Token';
@@ -47,35 +47,39 @@
 
     authFac.login = function(loginData) {
 
-      $resource(baseURL + "users/login")
+
+      return $resource(baseURL + "users/login")
         .save(loginData,
           function(response) {
             storeUserCredentials({username:loginData.username, token: response.token});
             $rootScope.$broadcast('login:Successful');
             console.log('logged in ok');
             //$timeout(function () {
-              $state.go('app.currentSprint');
+            //  $state.go('app.currentSprint');
               //$state.reload();
               //$window.location.reload(true);
             //}, 1000);
+
           },
           function(response){
             isAuthenticated = false;
 
-            var message = '<div><p>' +  response.data.err.message +
-              '</p><p>' + response.data.err.name + '</p></div>';
 
-            var alertPopup = $ionicPopup.alert({
-              title: '<h4>Login Failed!</h4>',
-              template: message
-            });
-
-            alertPopup.then(function(res) {
-              console.log('Login Failed!');
-            });
+            //var message = '<div><p>' +  response.data.err.message +
+            //  '</p><p>' + response.data.err.name + '</p></div>';
+            //
+            //var alertPopup = $ionicPopup.alert({
+            //  title: '<h4>Login Failed!</h4>',
+            //  template: message
+            //});
+            //
+            //alertPopup.then(function(res) {
+            //  console.log('Login Failed!');
+            //});
           }
 
         );
+
 
     };
 
