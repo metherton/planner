@@ -164,17 +164,17 @@
             'menuContent': {
               templateUrl: 'templates/currentSprint.html',
               controller: 'CurrentSprintCtrl',
-              controllerAs: 'vm'
-              //resolve: {
-              //  stories:  ['storyFactory', '$http', function(storyFactory, $http){
-              //    console.log($http.defaults.headers.common);
-              //    return storyFactory.query();
-              //  }],
-              //  sprint: ['sprintFactory', '$http', function(sprintFactory, $http){
-              //    return sprintFactory.get({id:0});
-              //  }]
-              //
-              //}
+              controllerAs: 'vm',
+              resolve: {
+                stories:  ['storyFactory', '$http', function(storyFactory, $http){
+                  console.log($http.defaults.headers.common);
+                  return storyFactory.query();
+                }],
+                sprint: ['sprintFactory', '$http', function(sprintFactory, $http){
+                  return sprintFactory.get({id:0});
+                }]
+
+              }
             }
           }
         });
