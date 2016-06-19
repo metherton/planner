@@ -36,18 +36,18 @@
           abstract: true,
           templateUrl: 'templates/sidebar.html',
           controller: 'AppCtrl',
-          controllerAs: 'vm'
-          //resolve: {
-          //  users: ['userFactory', '$http', function (userFactory, $http) {
-          //    return userFactory.query();
-          //  }],
-          //  sprints: ['sprintFactory', '$http', function (sprintFactory, $http) {
-          //    return sprintFactory.query();
-          //  }],
-          //  stories: ['storyFactory', '$http', function (storyFactory, $http) {
-          //    return storyFactory.query();
-          //  }]
-          //}
+          controllerAs: 'vm',
+          resolve: {
+            users: ['userFactory', '$http', function (userFactory, $http) {
+              return userFactory.query();
+            }],
+            sprints: ['sprintFactory', '$http', function (sprintFactory, $http) {
+              return sprintFactory.query();
+            }],
+            stories: ['storyFactory', '$http', function (storyFactory, $http) {
+              return storyFactory.query();
+            }]
+          }
         })
         //
         //.state('app.search', {
@@ -103,61 +103,61 @@
               //}
             //}
           })
-        //.state('app.users', {
-        //  url: '/users',
-        //  views: {
-        //    'menuContent': {
-        //      templateUrl: 'templates/users.html',
-        //      controller: 'UserCtrl',
-        //      controllerAs: 'vm',
-        //      cache: false,
-        //      resolve: {
-        //        users:  ['userFactory', '$http', function(userFactory, $http){
-        //          console.log($http.defaults.headers.common);
-        //          return userFactory.query();
-        //        }]
-        //
-        //      }
-        //    }
-        //  }
-        //})
-        //.state('app.sprints', {
-        //  url: '/sprints',
-        //  views: {
-        //    'menuContent': {
-        //      templateUrl: 'templates/sprints.html',
-        //      controller: 'SprintCtrl',
-        //      controllerAs: 'vm',
-        //      resolve: {
-        //        sprints:  ['sprintFactory', '$http', function(sprintFactory, $http){
-        //          console.log($http.defaults.headers.common);
-        //          return sprintFactory.query();
-        //        }],
-        //        sprint: ['sprintFactory', '$http', function(sprintFactory, $http){
-        //          return sprintFactory.get({id:0});
-        //        }]
-        //
-        //      }
-        //    }
-        //  }
-        //})
-        //.state('app.stories', {
-        //  url: '/stories',
-        //  views: {
-        //    'menuContent': {
-        //      templateUrl: 'templates/stories.html',
-        //      controller: 'StoryCtrl',
-        //      controllerAs: 'vm',
-        //      resolve: {
-        //        sprints:  ['storyFactory', '$http', function(storyFactory, $http){
-        //          console.log($http.defaults.headers.common);
-        //          return storyFactory.query();
-        //        }]
-        //
-        //      }
-        //    }
-        //  }
-        //})
+        .state('app.users', {
+          url: '/users',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/users.html',
+              controller: 'UserCtrl',
+              controllerAs: 'vm',
+              cache: false,
+              resolve: {
+                users:  ['userFactory', '$http', function(userFactory, $http){
+                  console.log($http.defaults.headers.common);
+                  return userFactory.query();
+                }]
+
+              }
+            }
+          }
+        })
+        .state('app.sprints', {
+          url: '/sprints',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/sprints.html',
+              controller: 'SprintCtrl',
+              controllerAs: 'vm',
+              resolve: {
+                sprints:  ['sprintFactory', '$http', function(sprintFactory, $http){
+                  console.log($http.defaults.headers.common);
+                  return sprintFactory.query();
+                }],
+                sprint: ['sprintFactory', '$http', function(sprintFactory, $http){
+                  return sprintFactory.get({id:0});
+                }]
+
+              }
+            }
+          }
+        })
+        .state('app.stories', {
+          url: '/stories',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/stories.html',
+              controller: 'StoryCtrl',
+              controllerAs: 'vm',
+              resolve: {
+                sprints:  ['storyFactory', '$http', function(storyFactory, $http){
+                  console.log($http.defaults.headers.common);
+                  return storyFactory.query();
+                }]
+
+              }
+            }
+          }
+        })
         .state('app.currentSprint', {
           url: '/currentSprint',
           views: {
