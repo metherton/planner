@@ -1,15 +1,17 @@
 'use strict';
 
-var CurrentSprintPage = function () {
-  //browser.get('/app/currentSprint');
+var UpdateStoryPage = function () {
+  browser.get('/#/app/stories');
 };
 
-CurrentSprintPage.prototype = Object.create({}, {
+UpdateStoryPage.prototype = Object.create({}, {
+
+  firstStory: {get: function() {return element(by.repeater('story in vm.stories').row(0));} },
   txtUsername: {get: function() {return element(by.model('vm.loginData.username'));} },
   txtPassword: {get: function() {return element(by.model('vm.loginData.password'));} },
   btnSubmit: {get: function() {return element(by.xpath('//button[@type=\'submit\']'));} },
   menuOpener: { get: function () { return element(by.xpath('/html/body/ion-nav-view/ion-side-menus/ion-side-menu-content/ion-nav-bar/div[2]/ion-header-bar/div[1]/span/button')); }},
-  header: { get: function () { return element(by.xpath('/html/body/ion-nav-view/ion-side-menus/ion-side-menu-content/ion-nav-bar/div[2]/ion-header-bar/div[2]')); }},
+  updateStoryHeader:  {get: function () { return element(by.xpath('/html/body/div[3]/div[2]/ion-modal-view/ion-header-bar/h1')); }},
   linksHeader:{get: function() {return element(by.xpath('/html/body/ion-nav-view/ion-side-menus/ion-side-menu-content/ion-nav-bar/div[1]/ion-header-bar/div[2]'));}},
   leftMenuHeader: { get: function () { return element(by.xpath('/html/body/ion-nav-view/ion-side-menus/ion-side-menu/ion-header-bar/h1')); }},
   loginHeader: { get: function () { return element(by.xpath('//ion-modal-view//h1')); }},
@@ -33,4 +35,4 @@ CurrentSprintPage.prototype = Object.create({}, {
   }}
 });
 
-module.exports = CurrentSprintPage;
+module.exports = UpdateStoryPage;

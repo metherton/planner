@@ -9,7 +9,7 @@
   AppCtrl.$inject = ['$scope', '$ionicModal', '$timeout', 'users', 'AuthFactory', '$localStorage', '$state', 'sprintFactory', 'sprints', 'storyFactory', 'stories'];
   //AppCtrl.$inject = [];
 
-  function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints, storyFactory, stories) {
+    function AppCtrl($scope, $ionicModal, $timeout, users, AuthFactory, localStorage, $state, sprintFactory, sprints, storyFactory, stories) {
     //function AppCtrl() {
 
     var vm = this;

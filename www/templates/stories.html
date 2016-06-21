@@ -1,7 +1,7 @@
 <ion-view view-title="Stories">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="story in vm.stories" href="#/app/stories/{{story.id}}">
+      <ion-item ng-repeat="story in vm.stories" ng-click="vm.updateStory($index)">
         {{story.description}}
       </ion-item>
     </ion-list>
