@@ -36,7 +36,8 @@
     }
 
     function refreshData() {
-      vm.sprint = sprintFactory.get(vm.sprint._id).$promise.then(function(data) {
+      console.log('sprintid', vm.sprint._id);
+      vm.sprint = sprintFactory.get({id: vm.sprint._id}).$promise.then(function(data) {
         vm.sprint = data;
       });
     }
