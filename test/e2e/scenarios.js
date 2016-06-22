@@ -44,7 +44,7 @@ describe('planner App E2E Testing', function() {
       it('should open update story page', function() {
         expect(browser.getLocationAbsUrl()).toMatch('/app/stories');
         updateStoryPage.firstStory.click();
-        expect(updateStoryPage.updateStoryHeader.getText()).toBeDefined();
+        expect(updateStoryPage.updateStoryHeader.getText()).toEqual('Update Story');
       });
 
     });

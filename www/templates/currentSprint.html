@@ -23,7 +23,7 @@
         <div class="item assertive-border">
 
             <ion-item ng-repeat="st in vm.sprint.stories" ng-click="vm.onSwipeDown(st._id)"  on-swipe-down="vm.onSwipeDown(st._id)" style="border-style: dashed; border-width: thin">
-              <i class="fa fa-camera-retro fa-lg" ng-class="st.iconClass ? st.iconClass : 'fa-camera-retro'"></i>
+              <i ng-class="st.iconClass ? st.iconClass : 'fa fa-question-circle-o'"></i>
             </ion-item>
 
         </div>
@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col text-center" ng-repeat="story in vm.stories">
                 <ion-item on-swipe-up="vm.onSwipeUp(story._id)" ng-click="vm.onSwipeUp(story._id)" style="border-style: dashed; border-width: thin">
-                  <i class="fa fa-camera-retro fa-lg" ng-class="story.iconClass ? story.iconClass : 'fa-camera-retro'"></i>
+                  <i ng-class="story.iconClass ? story.iconClass : 'fa fa-question-circle-o'"></i>
                 </ion-item>
             </div>
         </div>

@@ -59,10 +59,15 @@ describe('Controllers', function() {
         });
 
         it('should show update story form', function() {
-
             storyCtrl.updateStory(1);
             expect(storyCtrl.updateStoryForm.show).toHaveBeenCalled();
         });
+
+        it('should update story', function() {
+            storyCtrl.doUpdateStory();
+            expect(mockStoryFactory.update).toHaveBeenCalled();
+        });
+
 
     });
 

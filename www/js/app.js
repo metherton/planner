@@ -149,10 +149,14 @@
               controller: 'StoryCtrl',
               controllerAs: 'vm',
               resolve: {
-                sprints:  ['storyFactory', '$http', function(storyFactory, $http){
+                stories:  ['storyFactory', '$http', function(storyFactory, $http){
                   console.log($http.defaults.headers.common);
                   return storyFactory.query();
-                }]
+                }],
+                users: ['userFactory', '$http', function (userFactory, $http) {
+                  return userFactory.query();
+                }],
+
 
               }
             }

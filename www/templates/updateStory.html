@@ -2,7 +2,7 @@
   <ion-header-bar>
     <h1 class="title">Update Story</h1>
     <div class="buttons">
-      <button class="button button-clear" ng-click="vm.closeCreateStory()">Close</button>
+      <button class="button button-clear" ng-click="vm.closeUpdateStory()">Close</button>
     </div>
   </ion-header-bar>
   <ion-content>
@@ -40,6 +40,10 @@
             </div>
           </label>
         </li>
+        <label class="item item-input">
+          <span class="input-label">Icon Class</span>
+          <input type="text" ng-model="vm.story.iconClass">
+        </label>
         <label class="item">
           <button class="button button-block button-positive" type="submit">Update</button>
         </label>
